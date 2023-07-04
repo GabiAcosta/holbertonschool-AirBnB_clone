@@ -1,11 +1,26 @@
 #!/usr/bin/python3
-"""Base class model"""
+"""
+This module defines the `BaseModel` class, which serves as the base model
+for other classes.
+It provides basic attributes and methods that can be inherited and extended
+by other classes.
+
+Classes:
+- BaseModel: The base model class with attributes and methods common
+    to all models.
+
+Methods:
+- __init__: Initialize a new instance of the class.
+- __str__: Return a string representation of the object.
+- save: Update the 'updated_at' attribute with the current datetime.
+- to_dict: Convert the object's attributes to a dictionary representation.
+"""
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    """Class for BaseModel"""
+    """Base class for creating models"""
     def __init__(self):
         """
         Initialize a new instance of the class.
@@ -18,7 +33,8 @@ class BaseModel:
         """
         Return a string representation of the object.
         """
-        return "[{}] ({}) {}".format(__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
@@ -30,8 +46,8 @@ class BaseModel:
         """
         Convert the object's attributes to a dictionary representation.
         """
-        my_dict = self.__dict__
-        my_dict["__class__"] = __class__.__name__
+        my_dict = self.__dict__.copy()
+        my_dict["__class__"] = self.__class__.__name__
         my_dict["update_at"] = self.update_at.isoformat()
         my_dict["created_at"] = self.created_at.isoformat()
         return my_dict
