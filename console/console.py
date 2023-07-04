@@ -3,7 +3,7 @@
 import cmd
 
 
-class console(cmd.Cmd):
+class hbnb(cmd.Cmd):
     """Simple command processor
 
     Args:
@@ -30,6 +30,4 @@ class console(cmd.Cmd):
         return self.do_EOF
 
 if __name__ == '__main__':
-    console().cmdloop()
-
-
+    hbnb().cmdloop()
