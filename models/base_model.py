@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module defines the `BaseModel` class, which serves as the base model
+This module defines the BaseModel class, which serves as the base model
 for other classes.
 It provides basic attributes and methods that can be inherited and extended
 by other classes.
@@ -48,7 +48,7 @@ class BaseModel:
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """  r
+        """
         Update the 'updated_at' attribute with the current datetime.
         """
         from . import storage
