@@ -1,9 +1,20 @@
 #!/usr/bin/python3
-"""for later"""
+"""
+This module provides a FileStorage class that serializes instances
+to a JSON file and deserializes JSON files to instances.
+
+Classes:
+FileStorage: The main class that handles serialization and deserialization.
+
+Methods:
+- all: Returns the dictionary __objects.
+- new: Sets in __objects the obj with key <obj class name>.id.
+- save: Serializes __objects to the JSON file (path: __file_path).
+- reload: Deserializes the JSON file to __objects.
+"""
 import json
 import os
 from models.base_model import BaseModel
-
 
 
 class FileStorage:
@@ -13,7 +24,7 @@ class FileStorage:
     __file_path = "objects.json"
     __objects = {}
     class_dict = {"BaseModel": BaseModel}
-    
+
     def all(self):
         """Returns the dictionary __objects"""
         return FileStorage.__objects
@@ -25,7 +36,7 @@ class FileStorage:
 
     def save(self):
         """
-        
+        Serializes __objects to the JSON file (path: __file_path)
         """
         if FileStorage.__objects is not None:
             objs_to_dump = {}
@@ -36,7 +47,9 @@ class FileStorage:
 
     def reload(self):
         """
-
+         Deserializes the JSON file to __objects (only if the
+         JSON file (__file_path) exists ; otherwise, do nothing.
+         If the file doesn’t exist, no exception should be raised)
         """
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as f:

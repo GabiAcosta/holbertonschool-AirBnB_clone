@@ -18,6 +18,7 @@ Methods:
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """Base class for creating models"""
     def __init__(self, *args, **kwargs):
@@ -38,7 +39,6 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             storage.new(self)
-                
 
     def __str__(self):
         """
@@ -48,7 +48,7 @@ class BaseModel:
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """  r     
+        """  r
         Update the 'updated_at' attribute with the current datetime.
         """
         from . import storage
