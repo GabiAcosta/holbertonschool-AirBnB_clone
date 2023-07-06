@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-""" Console for AirBnB"""
+"""Console for AirBnB"""
 import cmd
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage 
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -32,52 +32,122 @@ class HBNBCommand(cmd.Cmd):
         """
         return self.do_EOF
 
-    def do_create(self, line):
-        """ 
-        
-        """
-        if line is None:
-            print("** class name missing **")
-        elif line not in FileStorage.class_dict:
-            print("** class doesn't exist **")
-        else:
-            mew = FileStorage.class_dict[line]()
-            FileStorage.new(mew, mew)
-            FileStorage.save(self)
-            print(mew.id)
-    
-    def do_show(self, line):
-        """ 
-        
-        """
-        if line is None:
-            print("** class name missing **")
-        if line is not None:
-            args = line.split(" ")
-        else:
-            print("** class name doesn't exist **")
-        # if args[1] not in FileStorage.class_dict:
-        #     print("** class doesn't exist **")
-          
-        # if args[2] != "id":
-        #     print("** instance id missing **")
-        # else:
-        #     for k in FileStorage.__objects.keys():
-        #         id = k.split(".")
-        #         if id[1] != args[2]:
-        #             print("** no instance found **")
-        #         else:
-        #             self.__str__
-        
-        
-            
-
     def emptyline(self):
         """
         Do nothing when an empty line is entered
         """
         pass
 
+    def do_create(self, line):
+        """
+        Create a new instance of a specified class.
+        """
+        args = line.split(" ")
+        if not args[0]:
+            print("** class name missing **")
+        elif line not in storage.class_dict:
+            print("** class doesn't exist **")
+        else:
+            new_obj = storage.class_dict[line]()
+            storage.save()
+            print(new_obj.id)
+
+    def do_show(self, line):
+        """
+        Display the string representation of an instance.
+        """
+        args = line.split(" ")
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.class_dict:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            objs = storage.all()
+            coincidence = False
+            for key in objs.keys():
+                id = key.split(".")
+                if id[1] == args[1]:
+                    print(objs[key].__str__())
+                    coincidence = True
+                    break
+            if not coincidence:
+                print("** no instance found **")
+
+    def do_destroy(self, line):
+        """
+        Delete an instance based on the class name and instance id.
+        """
+        args = line.split(" ")
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.class_dict:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            objs = storage.all()
+            coincidence = False
+            for key in objs.keys():
+                id = key.split(".")
+                if id[1] == args[1]:
+                    del storage.all()[key]
+                    storage.save()
+                    coincidence = True
+                    break
+            if not coincidence:
+                print("** no instance found **")
+
+    def do_all(self, line):
+        """
+        Prints all string representation of all instances based or not
+        on the class name.
+        """
+        args = line.split(" ")
+        list_objs = []
+        if len(args) == 0:
+            for obj in storage.all().values():
+                list_objs.append(str(obj))
+            print(list_objs)
+        elif args[0] in storage.class_dict:
+            for key, value in storage.all().items():
+                if args[0] in key:
+                    list_objs.append(str(value))
+            print(list_objs)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, line):
+        """
+        Updates an instance based on the class name and id by adding
+        or updating attribute.
+        """
+        args = line.split(" ")
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.class_dict:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            objs = storage.all()
+            coincidence = False
+            for key in objs.keys():
+                id = key.split(".")
+                if id[1] == args[1]:
+                    coincidence = True
+                    break
+            if not coincidence:
+                print("** no instance found **")
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
+                print("** value missing **")
+            else:
+                objs[f"{args[0]}.{args[1]}"].__dict__[
+                    args[2]] = args[3].strip('"')
+                storage.save()
 
 
 if __name__ == '__main__':
