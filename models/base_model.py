@@ -25,6 +25,7 @@ class BaseModel:
         """
         Initialize a new instance of the class.
         """
+        from . import storage
         if kwargs:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -37,6 +38,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            storage.new(self)
 
     def __str__(self):
         """
@@ -46,10 +48,12 @@ class BaseModel:
             self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """
+        """  r
         Update the 'updated_at' attribute with the current datetime.
         """
+        from . import storage
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
