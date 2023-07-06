@@ -17,7 +17,6 @@ Methods:
 """
 import uuid
 from datetime import datetime
-from models import storage
 
 class BaseModel:
     """Base class for creating models"""
@@ -25,6 +24,7 @@ class BaseModel:
         """
         Initialize a new instance of the class.
         """
+        from . import storage
         if kwargs:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -51,6 +51,7 @@ class BaseModel:
         """  r     
         Update the 'updated_at' attribute with the current datetime.
         """
+        from . import storage
         self.updated_at = datetime.now()
         storage.save()
 

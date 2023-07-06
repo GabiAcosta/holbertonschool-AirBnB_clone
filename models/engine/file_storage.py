@@ -2,6 +2,7 @@
 """for later"""
 import json
 import os
+from models.base_model import BaseModel
 
 
 
@@ -11,6 +12,7 @@ class FileStorage:
     """
     __file_path = "objects.json"
     __objects = {}
+    class_dict = {"BaseModel": BaseModel}
     
     def all(self):
         """Returns the dictionary __objects"""
@@ -26,9 +28,11 @@ class FileStorage:
         
         """
         if FileStorage.__objects is not None:
-            json_string = json.dumps(FileStorage.__objects)
+            objs_to_dump = {}
+            for k, v in FileStorage.__objects.items():
+                objs_to_dump[k] = v.to_dict()
             with open(FileStorage.__file_path, "w") as f:
-                f.write(json_string)
+                json.dump(objs_to_dump, f)
 
     def reload(self):
         """
@@ -36,4 +40,7 @@ class FileStorage:
         """
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as f:
-                FileStorage.__objects = json.loads(f.read())
+                new_obj = json.load(f)
+            for k, v in new_obj.items():
+                obj = FileStorage.class_dict[v["__class__"]](**v)
+                FileStorage.__objects[k] = obj
