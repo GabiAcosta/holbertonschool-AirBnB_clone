@@ -7,7 +7,7 @@ from the BaseModel class.
 
 Classes:
 - User: Represents a user entity with email, password, first name, and
-        last name attributes.
+last name attributes.
 
 Attributes:
 - email (str): The email address of the user.
@@ -20,7 +20,6 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """User class that inherits from the BaseModel."""
-
     email = ""
     password = ""
     first_name = ""

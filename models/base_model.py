@@ -7,7 +7,7 @@ by other classes.
 
 Classes:
 - BaseModel: The base model class with attributes and methods common
-    to all models.
+to all models.
 
 Methods:
 - __init__: Initialize a new instance of the class.
