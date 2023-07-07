@@ -9,11 +9,4 @@ class State(BaseModel):
     Inherits from the BaseModel class.
     """
 
-    def __init__(self, name=''):
-        """
-        Initializes an instance of State.
-
-        Args:
-            name (str): Name of the state (default is an empty string).
-        """
-        self.name = name
+    name = ''
