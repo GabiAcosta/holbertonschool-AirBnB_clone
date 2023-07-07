@@ -106,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = line.split(" ")
         list_objs = []
-        if len(args) == 0:
+        if not args[0]:
             for obj in storage.all().values():
                 list_objs.append(str(obj))
             print(list_objs)
