@@ -2,11 +2,11 @@ AirBnB Clone - Command Interpreter
 This is the first step towards building an AirBnB clone, a web application that allows management of AirBnB objects.
 
 The command interpreter allows for the following functionalities:
-    - Creation of new objects (User, State, City, Place)
-    - Retrieval of objects from a file, database, etc.
-    - Operations on objects (counting, computing stats)
-    - Updating attributes of an object
-    - Destruction of an object
+- Creation of new objects (User, State, City, Place)
+- Retrieval of objects from a file, database, etc.
+- Operations on objects (counting, computing stats)
+- Updating attributes of an object
+- Destruction of an object
 
 Usage:
 
@@ -30,14 +30,13 @@ This will execute the command "help" in the command interpreter.
 
 Available Commands
 The command interpreter supports the following commands:
-
-help: Displays the list of available commands or provides help for a specific command.
-quit: Exits the command interpreter.
-create: Creates a new instance of a specified class.
-show: Displays the string representation of an instance based on the class name and instance ID.
-destroy: Deletes an instance based on the class name and instance ID.
-all: Displays the string representation of all instances or all instances of a specified class.
-update: Updates the attributes of an instance based on the class name and instance ID.
+- help: Displays the list of available commands or provides help for a specific command.
+- quit: Exits the command interpreter.
+- create: Creates a new instance of a specified class.
+- show: Displays the string representation of an instance based on the class name and instance ID.
+- destroy: Deletes an instance based on the class name and instance ID.
+- all: Displays the string representation of all instances or all instances of a specified class.
+- update: Updates the attributes of an instance based on the class name and instance ID.
 
 File Storage
 The command interpreter uses file storage to persist data. The objects are serialized and deserialized to/from JSON format and stored in files.
