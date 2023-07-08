@@ -146,16 +146,8 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 4:
                 print("** value missing **")
             else:
-                if args[3].startswith('"') and args[3].endswith('"'):
-                    args[3] = args[3][1:-1]
-                elif args[3].isdigit():
-                    args[3] = int(args[3])
-                else:
-                    try:
-                        args[3] = float(args[3])
-                    except ValueError:
-                        pass
-                objs[f"{args[0]}.{args[1]}"].__dict__[args[2]] = args[3]
+                objs[f"{args[0]}.{args[1]}"].__dict__[
+                    args[2]] = args[3].strip('"')
                 storage.save()
 
 
