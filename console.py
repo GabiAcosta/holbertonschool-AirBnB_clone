@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Console for AirBnB"""
 import cmd
-import shlex
 from models.base_model import BaseModel
 from models import storage
 
@@ -124,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         Updates an instance based on the class name and id by adding
         or updating attribute.
         """
-        args = shlex.split(line)
+        args = line.split(" ")
         if not args[0]:
             print("** class name missing **")
         elif args[0] not in storage.class_dict:
