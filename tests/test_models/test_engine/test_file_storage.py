@@ -25,7 +25,7 @@ class TestFileStorage(unittest.TestCase):
         obj_dict = storage.all()
         self.assertIsNotNone(obj_dict)
         self.assertIsInstance(obj_dict, dict)
-        
+
     def test_new(self):
         """
         Test the new() method of FileStorage.
@@ -34,12 +34,13 @@ class TestFileStorage(unittest.TestCase):
         storage.new(user)
         key = f"{user.__class__.__name__}.{user.id}"
         self.assertIsNotNone(obj_dict[key])
-        
+
     def test_save(self):
         """
         Test the save() method of FileStorage.
         """
         self.assertTrue(os.path.exists("objects.json"))
+
 
 if __name__ == "__main__":
     unittest.main()
