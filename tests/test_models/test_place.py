@@ -19,11 +19,19 @@ place.amenity_ids = []
 
 
 class TestPlace(unittest.TestCase):
-
+    """
+    TestPlace class to perform unit tests on the Place class.
+    """
     def test_subclass(self):
+        """
+        Test if Place is a subclass of BaseModel.
+        """
         self.assertTrue(issubclass(place.__class__, BaseModel), True)
 
     def test_attr(self):
+        """
+        Test the attributes of Place instance.
+        """
         self.assertTrue("city_id" in place.__dict__)
         self.assertTrue("user_id" in place.__dict__)
         self.assertTrue("name" in place.__dict__)
@@ -40,6 +48,9 @@ class TestPlace(unittest.TestCase):
         self.assertTrue("updated_at" in place.__dict__)
 
     def test_attr_type(self):
+        """
+        Test the attribute types of Place instance.
+        """
         self.assertEqual(type(place.city_id), str)
         self.assertEqual(type(place.user_id), str)
         self.assertEqual(type(place.name), str)
@@ -53,10 +64,16 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(type(place.amenity_ids), list)
 
     def test_save(self):
+        """
+        Test the save() method of Place instance.
+        """
         place.save()
         self.assertNotEqual(place.created_at, place.updated_at)
 
     def test_to_dict(self):
+        """
+        Test the to_dict() method of Place instance.
+        """
         place_dict = place.to_dict()
         self.assertEqual(place_dict["__class__"], "Place")
         self.assertIsInstance(place_dict["created_at"], str)
