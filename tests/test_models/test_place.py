@@ -18,7 +18,7 @@ place.longitude = -16.684638
 place.amenity_ids = []
 
 
-class TestCity(unittest.TestCase):
+class TestPlace(unittest.TestCase):
 
     def test_subclass(self):
         self.assertTrue(issubclass(place.__class__, BaseModel), True)
