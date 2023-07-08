@@ -3,12 +3,11 @@
 import unittest
 from models.base_model import BaseModel
 
-
 base = BaseModel()
 
 
 class TestBaseModel(unittest.TestCase):
-    
+
     def test_init(self):
         self.assertTrue(isinstance(base, BaseModel))
 
