@@ -11,7 +11,7 @@ user.last_name = "Buckets"
 user.password = "im_HIM"
 
 
-class TestBaseModel(unittest.TestCase):
+class TestUser(unittest.TestCase):
 
     def test_subclass(self):
         self.assertTrue(issubclass(user.__class__, BaseModel), True)
