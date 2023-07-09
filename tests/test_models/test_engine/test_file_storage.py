@@ -39,7 +39,34 @@ class TestFileStorage(unittest.TestCase):
         """
         Test the save() method of FileStorage.
         """
-        self.assertTrue(os.path.exists("objects.json"))
+        self.assertTrue(os.path.exists("file.json"))
+
+    def test_reload(self):
+        """
+        Test the reload() method of FileStorage.
+        """
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+        with open("file.json", "w") as f:
+            f.write("{}")
+        with open("file.json", "r") as f:
+            for arg in f:
+                self.assertEqual(arg, "{}")
+        self.assertIs(storage.reload(), None)
+
+    def test_file_path(self):
+        """
+        Test the file_path attribute of FileStorage.
+        """
+        self.assertTrue(type(storage._FileStorage__file_path) is str)
+
+    def test_objs_dict(self):
+        """
+        Test the __objects attribute of FileStorage.
+        """
+        self.assertTrue(type(storage._FileStorage__objects) is dict)
 
 
 if __name__ == "__main__":
