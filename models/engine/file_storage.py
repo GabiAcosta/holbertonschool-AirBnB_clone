@@ -27,7 +27,7 @@ class FileStorage:
     """
     Serializes instances to a JSON file and deserializes JSON file to instances
     """
-    __file_path = "file.json"
+    __file_path = "objects.json"
     __objects = {}
     class_dict = {"BaseModel": BaseModel, "User": User, "City": City,
                   "State": State, "Amenity": Amenity,
