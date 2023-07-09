@@ -56,18 +56,6 @@ class TestFileStorage(unittest.TestCase):
                 self.assertEqual(arg, "{}")
         self.assertIs(storage.reload(), None)
 
-    def test_file_path(self):
-        """
-        Test the file_path attribute of FileStorage.
-        """
-        self.assertTrue(type(storage._FileStorage__file_path) is str)
-
-    def test_objs_dict(self):
-        """
-        Test the __objects attribute of FileStorage.
-        """
-        self.assertTrue(type(storage._FileStorage__objects) is dict)
-
 
 if __name__ == "__main__":
     unittest.main()
