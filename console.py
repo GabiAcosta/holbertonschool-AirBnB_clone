@@ -45,8 +45,10 @@ class HBNBCommand(cmd.Cmd):
         args = line.split(" ")
         if not args[0]:
             print("** class name missing **")
+            return
         elif line not in storage.class_dict:
             print("** class doesn't exist **")
+            return
         else:
             new_obj = storage.class_dict[line]()
             storage.save()
@@ -59,10 +61,13 @@ class HBNBCommand(cmd.Cmd):
         args = line.split(" ")
         if not args[0]:
             print("** class name missing **")
+            return
         elif args[0] not in storage.class_dict:
             print("** class doesn't exist **")
+            return
         elif len(args) < 2:
             print("** instance id missing **")
+            return
         else:
             objs = storage.all()
             coincidence = False
@@ -74,6 +79,7 @@ class HBNBCommand(cmd.Cmd):
                     break
             if not coincidence:
                 print("** no instance found **")
+                return
 
     def do_destroy(self, line):
         """
@@ -82,10 +88,13 @@ class HBNBCommand(cmd.Cmd):
         args = line.split(" ")
         if not args[0]:
             print("** class name missing **")
+            return
         elif args[0] not in storage.class_dict:
             print("** class doesn't exist **")
+            return
         elif len(args) < 2:
             print("** instance id missing **")
+            return
         else:
             objs = storage.all()
             coincidence = False
@@ -98,6 +107,7 @@ class HBNBCommand(cmd.Cmd):
                     break
             if not coincidence:
                 print("** no instance found **")
+                return
 
     def do_all(self, line):
         """
@@ -110,13 +120,16 @@ class HBNBCommand(cmd.Cmd):
             for obj in storage.all().values():
                 list_objs.append(str(obj))
             print(list_objs)
+            return
         elif args[0] in storage.class_dict:
             for key, value in storage.all().items():
                 if args[0] in key:
                     list_objs.append(str(value))
             print(list_objs)
+            return
         else:
             print("** class doesn't exist **")
+            return
 
     def do_update(self, line):
         """
@@ -126,10 +139,13 @@ class HBNBCommand(cmd.Cmd):
         args = line.split(" ")
         if not args[0]:
             print("** class name missing **")
+            return
         elif args[0] not in storage.class_dict:
             print("** class doesn't exist **")
+            return
         elif len(args) < 2:
             print("** instance id missing **")
+            return
         else:
             objs = storage.all()
             coincidence = False
@@ -140,10 +156,13 @@ class HBNBCommand(cmd.Cmd):
                     break
             if not coincidence:
                 print("** no instance found **")
+                return
             elif len(args) < 3:
                 print("** attribute name missing **")
+                return
             elif len(args) < 4:
                 print("** value missing **")
+                return
             else:
                 objs[f"{args[0]}.{args[1]}"].__dict__[
                     args[2]] = args[3].strip('"')
